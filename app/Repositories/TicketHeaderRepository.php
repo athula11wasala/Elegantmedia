@@ -16,14 +16,16 @@ class TicketHeaderRepository {
      */
     public  function  addTicket($data,$customet_id){
 
+
         try {
             $objTicket = new TicketHeader;
             $objTicket->cust_id = $customet_id;
             $objTicket->inquiry = $data['input_inqry'];
+            $objTicket->tel_no = $data['input_tel'];
             $objTicket->save();
         }
         catch (\PDOException $ex){
-            prin_r($ex->getMessage()); die();
+            print_r($ex->getMessage()); die();
              return false;
         }
        return true;

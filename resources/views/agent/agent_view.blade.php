@@ -25,42 +25,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
-                <div class="col-md-12">
-                    <!-- jquery validation -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Agent FeedBack <small></small></h3>
-                        </div>
-
-
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form class="forms-sample" method="post"  action="{{url("agent/add-feedback")}}" >
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" name="input_email" value="{{$email}}" disabled class="form-control" id="input_email" placeholder="Enter email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Inquiry</label>
-                                    <textarea class="form-control" name="input_inqry" placeholder="Inquiry"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Tel No</label>
-                                    <input type="text" name="input_tel"  class="form-control" id="input_tel" placeholder="Enter Tel-No">
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-            </div><!-- /.container-fluid -->
-
-
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Customer Inquiry</h3>

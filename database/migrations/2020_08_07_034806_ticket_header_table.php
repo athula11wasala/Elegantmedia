@@ -16,7 +16,7 @@ class TicketHeaderTable extends Migration
         Schema::create('tblticket_header', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('cust_id');
-            $table->string('tel-no');
+            $table->string('tel_no');
             $table->string('inquiry');
             $table->enum('status', ['pending', 'solved'])->default('pending');
             $table->timestamps();
