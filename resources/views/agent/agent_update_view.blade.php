@@ -14,7 +14,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="bre  adcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Agent v1</li>
+                        <li class="breadcrumb-item active"></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,8 +32,6 @@
                     <div class="card-header">
                         <h3 class="card-title">Agent FeedBack <small></small></h3>
                     </div>
-
-
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form class="forms-sample" method="post"  action="{{url("agent/add-feedback")}}" >
@@ -57,16 +55,21 @@
                                 <input type="text" name="input_feed_back"  class="form-control" id="input_feed_back" placeholder="Feed Back">
                                 <input type="hidden" name="hnd_ticket_id" value="{{$ticket->ticket_id}}">
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Status</label>
+                                {!! Form::select('drp_stauts', $drp_status, null, ['class' => 'form-control']) !!}
+                            </div>
+
+
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{{ url('/agent') }}" class="btn btn-primary">Back</a>
                         </div>
                     </form>
                 </div>
             </div><!-- /.container-fluid -->
-
-
 
     </section>
     <!-- /.content -->

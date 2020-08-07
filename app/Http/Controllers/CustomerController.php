@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Services\CmsService;
 use Illuminate\Http\Request;
-use Session;
 
 class CustomerController extends Controller {
 
@@ -27,7 +26,9 @@ class CustomerController extends Controller {
     public function index() {
 
         $data = $this->cmsService->getAllTicket(Auth::user()->id);
-        return view('customer/customer_view',['data'=>$data,'email'=>Auth::user()->email]);
+        return view('customer/customer_view',[
+                           'data'=>$data,
+                           'email'=>Auth::user()->email]);
     }
 
     /**
@@ -38,11 +39,13 @@ class CustomerController extends Controller {
 
         if ($this->cmsService->createInquiry($request->all()) == true) {
 
-            return Redirect::to("customer/");
-              //  ->with("message", "Successfully Created Inquiry.");
+            return redirect()
+                ->back()
+                ->with("message",  __ ( 'messages.create_inqry' ));
         }
-        return Redirect::to("customer/")
-            ->with("messageWarning", "Something Went wrong.");
+            return redirect()
+                ->back()
+                ->with("messageWarning",  __ ( 'messages.messageWarning' ));
 
     }
 }

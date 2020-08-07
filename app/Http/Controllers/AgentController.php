@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Services\CmsService;
 use Illuminate\Http\Request;
-use Session;
+
 
 class AgentController extends Controller {
 
@@ -39,21 +39,29 @@ class AgentController extends Controller {
 
         if ($this->cmsService->createAgentFeedBack($request->all()) == true) {
 
-            return Redirect::to("agent/");
-              //  ->with("message", "Successfully Created Inquiry.");
+            return redirect('agent/')
+                  ->with("message",  __ ( 'messages.create_feedback' ) );
         }
-        return Redirect::to("agent/")
-            ->with("messageWarning", "Something Went wrong.");
+        return redirect()
+            ->back()
+            ->with("messageWarning",  __ ( 'messages.messageWarning' ));
+ }
 
-    }
-
+    /**
+     * retrive ticket ccoeding to the ticket Id
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function retriveTicket($id)
     {
+        $ticket_status = $this->cmsService->TicketHeaderStatus();
         $data = $this->cmsService->gePendingTicket();
         $ticket = $this->cmsService->retriveTicket($id);
 
-        return view('agent/agent_update_view',['data'=>$data,
-                          'ticket'=>$ticket,'email'=>Auth::user()->email]);
+        return view('agent/agent_update_view',
+                           ['data'=>$data,
+                            'ticket'=>$ticket,
+                            'email'=>Auth::user()->email, 'drp_status'=>$ticket_status  ]);
 
     }
 }

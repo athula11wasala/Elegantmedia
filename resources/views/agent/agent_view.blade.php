@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="bre  adcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Agent v1</li>
+                            <li class="breadcrumb-item active"></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

@@ -30,13 +30,9 @@ class TicketHeaderRequest extends FormRequest
 
     public function rules() {
 
-        switch ($this->method()) {
-            case "POST":
-
                 return [
                     'input_inqry' => 'required',
                     'input_tel' => 'required',
                 ];
-        }
     }
 }

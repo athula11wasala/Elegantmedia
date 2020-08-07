@@ -20,7 +20,7 @@ class TicketDetailsRepository {
 
             if($objTicketDetail->save()){
                 $objTicketHeader = TicketHeader::find($data['hnd_ticket_id']);
-                $objTicketHeader->status = 'solved';
+                $objTicketHeader->status =   $data['drp_stauts'];
                 $objTicketHeader->save();
             }
 

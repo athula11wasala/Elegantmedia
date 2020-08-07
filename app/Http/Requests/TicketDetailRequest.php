@@ -25,18 +25,15 @@ class TicketDetailRequest extends FormRequest
         return [
             'hnd_ticket_id.required' => 'The Ticket Id is Required.',
             'input_feed_back.required' => 'The FeedBack is Required.',
+            'drp_stauts.not_in' =>'Please select Ticket Status'
         ];
     }
 
     public function rules() {
-
-        switch ($this->method()) {
-            case "POST":
-
-                return [
+           return [
                     'hnd_ticket_id' => 'required',
                     'input_feed_back' => 'required',
+                    'drp_stauts'=> 'required|not_in:0',
                 ];
-        }
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use DB;
 use App\Model\TicketHeader;
 use Illuminate\Support\Facades\Config;
 
@@ -16,7 +15,6 @@ class TicketHeaderRepository {
      */
     public  function  addTicket($data,$customet_id){
 
-
         try {
             $objTicket = new TicketHeader;
             $objTicket->cust_id = $customet_id;
@@ -25,12 +23,10 @@ class TicketHeaderRepository {
             $objTicket->save();
         }
         catch (\PDOException $ex){
-            print_r($ex->getMessage()); die();
              return false;
         }
        return true;
     }
-
 
     /**
      * get all ticket
@@ -38,28 +34,23 @@ class TicketHeaderRepository {
      */
     public function  getAllTicket($cust_id = 0){
 
-        $result =  DB::table('tblticket_header')->select('tblticket_header.id as id','tblticket_header.cust_id','tblticket_header.inquiry','tblticket_header.status',
+        $result =  TicketHeader::select('tblticket_header.id as id','tblticket_header.cust_id','tblticket_header.inquiry','tblticket_header.status',
                          'tblusers.email as name','tblticket_details.description as feedback')
-         ->leftjoin('tblusers', 'tblusers.id', '=', 'tblticket_header.cust_id')
-         ->leftjoin('tblticket_details', 'tblticket_details.ticket_id', '=', 'tblticket_header.id');
+                     ->leftjoin('tblusers', 'tblusers.id', '=', 'tblticket_header.cust_id')
+                     ->leftjoin('tblticket_details', 'tblticket_details.ticket_id', '=', 'tblticket_header.id');
 
         if(!empty($cust_id)){
 
             $result = $result->where('tblticket_header.cust_id', "=",$cust_id)
-                              ->orderBy('tblticket_header.id','DESC');
+                              ->orderBy('tblticket_header.id',Config::get ( 'custom_config.TICKET_ORDER' ));
         }else {
 
-            $result=
-                  $result->orderBy('tblticket_header.status','DESC');
-
-
+            $result= $result->orderBy('tblticket_header.status',Config::get ( 'custom_config.TICKET_ORDER' ));
         }
-        $result =     $result->get();
+        $result = $result->get();
 
         return  $result;
     }
-
-
 
     /**retive ticket according the id
      * @param $id
@@ -67,8 +58,8 @@ class TicketHeaderRepository {
      */
     public function getTicket($id){
 
-        $result =  DB::table('tblticket_header')->
-        select('tblticket_header.id as ticket_id', 'tblticket_header.cust_id','tblticket_header.inquiry','tblticket_header.status',
+        $result =  TicketHeader::select
+        ('tblticket_header.id as ticket_id', 'tblticket_header.cust_id','tblticket_header.inquiry','tblticket_header.status',
             'tblusers.email as name')
             ->leftjoin('tblusers', 'tblusers.id', '=', 'tblticket_header.cust_id')
             ->where('tblticket_header.id',$id)

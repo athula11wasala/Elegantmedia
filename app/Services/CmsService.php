@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\TicketHeaderRepository;
 use App\Repositories\TicketDetailsRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class CmsService {
 
@@ -70,4 +71,15 @@ class CmsService {
 
     }
 
+    /**
+     * populate Ticket Heade Status
+     * @return mixed
+     */
+    public  function  TicketHeaderStatus(){
+
+        return Config::get ( 'custom_config.TICKET_HEADER_STATUS' );
+
+    }
+
 }
+

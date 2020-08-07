@@ -9,6 +9,7 @@
                             @foreach ($errors->all() as $error)
                                 {!! $error !!}<br>
                             @endforeach
+                        </div>
                             @endif
 
                             @if (Session::has('message'))
@@ -26,5 +27,4 @@
                         </div>
                 </div>
             </div></div>
-    </div>
-@endif
+  @endif
